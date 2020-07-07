@@ -1,0 +1,41 @@
+{
+    "manifest_version": 2,
+    "name": "ChromeEmitterExample",
+    "version": "0.0.1",
+    "short_name": "CE Example",
+    "description": "introduce how to use chrome-emitter",
+    "homepage_url": "https://github.com/ltaoo/chrome-emitter-example",
+    "permissions": [
+        "storage",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "background": {
+        "persistent": true,
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "options_page": "options.html",
+    "browser_action": {
+        "default_icon": {
+            "19": "icons/icon-19.png",
+            "38": "icons/icon-38.png"
+        },
+        "default_popup": "popup.html",
+        "default_title": "ChromeEmitter"
+    },
+    "web_accessible_resources": [
+      "injected.js"
+    ]
+}
