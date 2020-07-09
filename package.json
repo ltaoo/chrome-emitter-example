@@ -4,7 +4,7 @@
   "description": "",
   "main": "background.js",
   "scripts": {
-    "start": "yarn webpack --config webpack.config.js --watch",
+    "start": "yarn webpack --config webpack.config.js --watch --devtool='source-map' --mode='development'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

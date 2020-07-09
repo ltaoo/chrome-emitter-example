@@ -4,10 +4,10 @@ const { getContent } = require('./utils');
 
 console.log('here is inserted');
 
-emitter.on('popup-to-inserted', (msg, str, num) => {
-  const content = getContent(msg);
-  console.log('[inserted] from popup', content, str, num);
-});
+// emitter.on('popup-to-inserted', (msg, str, num) => {
+//   const content = getContent(msg);
+//   console.log('[inserted] from popup', content, str, num);
+// });
 // emitter.on('options-to-inserted', (msg) => {
 //   const content = getContent(msg);
 //   console.log('[inserted] from options', content);

@@ -9,6 +9,8 @@ const toContentBtn = document.getElementById('toContent');
 const toOptionsBtn = document.getElementById('toOptions');
 const toInsertedBtn = document.getElementById('toInsertedScript');
 
+const screenshot = document.getElementById('screenshot');
+
 const fromBackgroundText = document.getElementById('fromBackground');
 const fromContentText = document.getElementById('fromContent');
 const fromOptionsText = document.getElementById('fromOptions');
@@ -30,6 +32,11 @@ toOptionsBtn.onclick = () => {
 toInsertedBtn.onclick = () => {
   console.log('[popup] send message to inserted');
   emitter.emit('popup-to-inserted', message, 'hahaha', 1);
+};
+
+screenshot.onclick = () => {
+  emitter.emit('startScreenshot');
+  // emitter.emit('start-screenshot');
 };
 
 emitter.on('background-to-popup', (msg) => {

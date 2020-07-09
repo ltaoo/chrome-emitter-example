@@ -5,12 +5,12 @@ const SCRIPTS = {
   BACKGROUND: 3,
 };
 const SCRIPT_NAMES = {
-  0: "none",
-  1: "content",
-  2: "injected",
-  3: "background",
-  4: "popup",
-  5: "options",
+  0: "NONE",
+  1: "CONTENT",
+  2: "INJECTED",
+  3: "BACKGROUND",
+  4: "POPUP",
+  5: "OPTIONS",
 };
 function checkScript() {
   if (chrome === undefined) {
@@ -38,4 +38,8 @@ module.exports.checkIsAtInjectedScript = function checkIsAtInjectedScript() {
 
 module.exports.checkIsAtBackgroundScript = function checkIsAtInjectedScript() {
   return checkScript() === SCRIPTS.BACKGROUND;
+}
+
+module.exports.getCurrentScriptName = function getCurrentScriptName() {
+  return SCRIPT_NAMES[checkScript()];
 }
