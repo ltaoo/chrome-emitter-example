@@ -4,33 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .btn {
+        margin-bottom: 10px;
+      }
+      .content {
+        margin-bottom: 10px;
+      }
+    </style>
   </head>
   <body>
-    <div style="padding: 20px; width: 180px; height: 80px;">
+    <div style="padding: 8px 10px; min-width: 180px;">
       <div>
-        <button id="toBackground">发送消息到 background</button>
-        <button id="toContent">发送消息到 content</button>
-        <button id="toOptions">发送消息到 options</button>
-        <button id="toInsertedScript">发送消息到 insertedScript</button>
-        <button id="screenshot">截图</button>
-      </div>
-      <div>
-        <div>
-          background:
-          <p id="fromBackground"></p>
-        </div>
-        <div>
-          content:
-          <p id="fromContent"></p>
-        </div>
-        <div>
-          options:
-          <p id="fromOptions"></p>
-        </div>
-        <div>
-          insertedScript:
-          <p id="fromInsertedScript"></p>
-        </div>
+        <button class="btn" id="toBackground">发送消息到 background</button>
+        <button class="btn" id="toContent">发送消息到 content</button>
+        <button class="btn" id="toOptions">发送消息到 options</button>
+        <button class="btn" id="toInjected">发送消息到 injected</button>
+        <button class="btn" id="screenshot">截图</button>
       </div>
     </div>
   </body>

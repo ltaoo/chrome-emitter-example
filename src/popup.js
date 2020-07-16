@@ -1,20 +1,13 @@
-// const emitter = require('chrome-emitter');
-const emitter = require('./utils/chrome-emitter');
-const { getContent } = require('./utils');
+import emitter from './utils/chrome-emitter';
 
 console.log("here is popup");
 
 const toBackgroundBtn = document.getElementById('toBackground');
 const toContentBtn = document.getElementById('toContent');
 const toOptionsBtn = document.getElementById('toOptions');
-const toInsertedBtn = document.getElementById('toInsertedScript');
+const toInsertedBtn = document.getElementById('toInjected');
 
 const screenshot = document.getElementById('screenshot');
-
-const fromBackgroundText = document.getElementById('fromBackground');
-const fromContentText = document.getElementById('fromContent');
-const fromOptionsText = document.getElementById('fromOptions');
-const fromInsertedText = document.getElementById('fromInsertedScript');
 
 const message = 'hello i am popup';
 toBackgroundBtn.onclick = () => {
@@ -30,29 +23,10 @@ toOptionsBtn.onclick = () => {
   emitter.emit('popup-to-options', message);
 };
 toInsertedBtn.onclick = () => {
-  console.log('[popup] send message to inserted');
-  emitter.emit('popup-to-inserted', message, 'hahaha', 1);
+  console.log('[popup] send message to injected');
+  emitter.emit('popup-to-injected', message);
 };
 
 screenshot.onclick = () => {
   emitter.emit('startScreenshot');
-  // emitter.emit('start-screenshot');
 };
-
-emitter.on('background-to-popup', (msg) => {
-  const content = getContent(msg);
-  fromBackgroundText.innerText = content;
-});
-emitter.on('content-to-popup', (msg) => {
-  const content = getContent(msg);
-  fromContentText.innerText = content;
-});
-emitter.on('options-to-popup', (msg) => {
-  const content = getContent(msg);
-  fromOptionsText.innerText = content;
-});
-emitter.on('inserted-to-popup', (msg) => {
-  const content = getContent(msg);
-  fromInsertedText.innerText = content;
-});
-

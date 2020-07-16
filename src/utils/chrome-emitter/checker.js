@@ -3,6 +3,8 @@ const SCRIPTS = {
   CONTENT: 1,
   INJECTED: 2,
   BACKGROUND: 3,
+  POPUP: 4,
+  OPTIONS: 5,
 };
 const SCRIPT_NAMES = {
   0: "NONE",
@@ -12,6 +14,7 @@ const SCRIPT_NAMES = {
   4: "POPUP",
   5: "OPTIONS",
 };
+const { chrome } = window;
 function checkScript() {
   if (chrome === undefined) {
     return SCRIPTS.NONE;
@@ -26,20 +29,36 @@ function checkScript() {
   if (window === bgWindow) {
     return SCRIPTS.BACKGROUND;
   }
-  return SCRIPTS.NONE;
+  const views = chrome.extension.getViews({ type: "popup" });
+  if (views.length !== 0) {
+    return SCRIPTS.POPUP;
+  }
+  return SCRIPTS.OPTIONS;
 }
 
-module.exports.checkIsAtContentScript = function checkIsAtContentScript() {
+export function checkIsAtContentScript() {
   return checkScript() === SCRIPTS.CONTENT;
 }
-module.exports.checkIsAtInjectedScript = function checkIsAtInjectedScript() {
+export function checkIsAtInjectedScript() {
   return checkScript() === SCRIPTS.INJECTED;
 }
-
-module.exports.checkIsAtBackgroundScript = function checkIsAtInjectedScript() {
+export function checkIsAtBackgroundScript() {
   return checkScript() === SCRIPTS.BACKGROUND;
 }
+export function checkIsAtPopup() {
+  return checkScript() === SCRIPTS.POPUP;
+}
+export function checkIsAtOptions() {
+  return checkScript() === SCRIPTS.OPTIONS;
+}
 
-module.exports.getCurrentScriptName = function getCurrentScriptName() {
+export function getCurrentScriptName() {
   return SCRIPT_NAMES[checkScript()];
 }
+
+export default {
+  getCurrentScriptName,
+  checkIsAtBackgroundScript,
+  checkIsAtInjectedScript,
+  checkIsAtContentScript,
+};

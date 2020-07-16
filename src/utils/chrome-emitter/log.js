@@ -1,12 +1,13 @@
 const checker = require("./checker");
 
+// const DEBUGGER = false;
 const DEBUGGER = true;
 
 const { getCurrentScriptName } = checker;
 
 const currentScriptName = getCurrentScriptName() || "UNKNOWN";
 
-module.exports = function log(...params) {
+export default function log(...params) {
   if (DEBUGGER === false) {
     return;
   }

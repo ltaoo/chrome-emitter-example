@@ -1,32 +1,47 @@
-// const emitter = require('chrome-emitter');
-const emitter = require('./utils/chrome-emitter');
-const { getContent } = require('./utils');
+import emitter from "./utils/chrome-emitter";
+import { getContent, createFixedContainer } from "./utils";
 
-console.log('here is inserted');
+console.log("here is inserted");
 
-// emitter.on('popup-to-inserted', (msg, str, num) => {
-//   const content = getContent(msg);
-//   console.log('[inserted] from popup', content, str, num);
-// });
-// emitter.on('options-to-inserted', (msg) => {
-//   const content = getContent(msg);
-//   console.log('[inserted] from options', content);
-// });
-// emitter.on('background-to-inserted', (msg) => {
-//   const content = getContent(msg);
-//   console.log('[inserted] from background', content);
-// });
-// emitter.on('content-to-inserted', (msg) => {
-//   const content = getContent(msg);
-//   console.log('[inserted] from content', content);
-// });
+const CONTAINER_ID = "__emitter_injected_id__";
 
-// const fixedBtn = document.createElement('button');
-// fixedBtn.innerText = '发送消息到 background';
-// fixedBtn.onclick = () => {
-//   emitter.emit('injected-to-background');
-// };
-document.body.onclick = () => {
-  // console.log('[inserted]', 'click body');
-  emitter.emit('injected-to-background');
+const $container = createFixedContainer(
+  CONTAINER_ID,
+  "由 injected 插入页面",
+  "top: 80px;"
+);
+$container.onclick = () => {
+  emitter.emit('injected-to-content', 'hello i am injected');
+  emitter.emit('injected-to-options', 'hello i am injected');
+  emitter.emit('injected-to-background', 'hello i am injected');
+}
+
+document.body.onload = () => {
+  document.body.appendChild($container);
 };
+
+function updateContainer(content) {
+  const $container = document.querySelector(`#${CONTAINER_ID}`);
+  $container.innerText = content;
+}
+
+emitter.on('popup-to-injected', (msg, str, num) => {
+  const content = getContent(msg);
+  updateContainer(content);
+  console.log('[injected] from popup', content, str, num);
+});
+emitter.on('options-to-injected', (msg) => {
+  const content = getContent(msg);
+  updateContainer(content);
+  console.log('[injected] from options', content);
+});
+emitter.on('background-to-injected', (msg) => {
+  const content = getContent(msg);
+  updateContainer(content);
+  console.log('[injected] from background', content);
+});
+emitter.on('content-to-injected', (msg) => {
+  const content = getContent(msg);
+  updateContainer(content);
+  console.log('[injected] from content', content);
+});

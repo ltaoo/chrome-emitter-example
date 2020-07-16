@@ -1,7 +1,5 @@
-const emitter = require("./chrome-emitter");
-const fixedElementUtils = require("./fixedElement");
-
-const { chrome } = window;
+import emitter from "../chrome-emitter";
+import * as fixedElementUtils from "./fixedElement";
 /**
  * 对页面截图
  * @param {*} times
@@ -19,7 +17,7 @@ function screenshot(canvasData, cb, times = 0, originalScrollTop) {
     fixedElementUtils.showFixedElements(topFixedElements);
     window.scrollTo(0, originalScrollTop);
     fixedElementUtils.resetStyle(document.body);
-    emitter.remove("screenshotComplete");
+    emitter.remove("screenshotSingleScreenComplete");
     mergeImages(canvasData, cb);
     return;
   }
@@ -38,14 +36,13 @@ function screenshot(canvasData, cb, times = 0, originalScrollTop) {
     }
   }
 
-  window.scrollTo(0, times * pageHeight);
   emitter.emit("screenshot");
 }
 
 function mergeImages(canvasData, cb) {
   const {
     screenshots,
-    size: { pageHeight, fullWidth, fullHeight },
+    size: { pageWidth, pageHeight, fullWidth, fullHeight },
   } = canvasData;
 
   const canvas = document.createElement("canvas");
@@ -69,7 +66,8 @@ function mergeImages(canvasData, cb) {
         y = fullHeight - pageHeight;
       }
       console.log("y position", y);
-      ctx.drawImage(tempImage, 0, y);
+      const h = (pageWidth * tempImage.height) / tempImage.width;
+      ctx.drawImage(tempImage, 0, y, pageWidth, h);
       index -= 1;
       if (index === -1) {
         if (cb) {
@@ -84,7 +82,7 @@ function mergeImages(canvasData, cb) {
   draw(screenshots[index]);
 }
 
-module.exports = function main(cb) {
+export default function main(cb) {
   const scrollWidth = document.body.scrollWidth;
   const scrollHeight = document.body.scrollHeight;
   const visibleWidth = document.documentElement.clientWidth;
@@ -121,19 +119,25 @@ module.exports = function main(cb) {
 
   let times = 0;
   const originalScrollTop = document.documentElement.scrollTop;
-  emitter.on("screenshotComplete", (url) => {
-    console.log("complete screenshot");
+
+  // 完成一屏截图
+  emitter.on("screenshotSingleScreenComplete", (url) => {
     canvasData.screenshots.push({
       row: times,
       column: 0,
       url,
     });
     times += 1;
+    window.scrollTo(0, times * visibleHeight);
     setTimeout(() => {
       screenshot(canvasData, cb, times, originalScrollTop);
-    }, 1000);
+    }, 1200);
   });
-  
-  fixedElementUtils.setStyle(document.body, { overflow: 'hidden' });
-  screenshot(canvasData, cb, times, originalScrollTop);
+
+  fixedElementUtils.setStyle(document.body, { overflow: "hidden" });
+
+  window.scrollTo(0, times * visibleHeight);
+  setTimeout(() => {
+    screenshot(canvasData, cb, times, originalScrollTop);
+  }, 1200);
 };

@@ -6,12 +6,12 @@
     <title>options</title>
   </head>
   <body>
-    <div style="width: 180px; height: 80px;">
+    <div>
       <div>
         <button id="toBackground">发送消息到 background</button>
         <button id="toContent">发送消息到 content</button>
-        <button id="toPopup">发送消息到 popup</button>
-        <button id="toInsertedScript">发送消息到 insertedScript</button>
+        <!-- <button id="toPopup">发送消息到 popup</button> -->
+        <button id="toInjected">发送消息到 injected</button>
       </div>
       <div>
         <div>
@@ -23,12 +23,12 @@
           <p id="fromContent"></p>
         </div>
         <div>
-          options:
+          popup:
           <p id="fromPopup"></p>
         </div>
         <div>
-          insertedScript:
-          <p id="fromInsertedScript"></p>
+          injected:
+          <p id="fromInjected"></p>
         </div>
       </div>
     </div>
