@@ -1,6 +1,8 @@
 # chrome-emitter example
 
-## example
+[`chrome-emitter`](https://github.com/ltaoo/chrome-emitter) 使用示例。
+
+## 说明
 
 安装该插件后，在任意页面刷新，右上角会出现两个白色方块，分别为 `content` 插入的与 `injected` 插入的。
 当接收到消息时，白色方块的内容会发生变更，展示由谁发送的消息；点击方块，会向其他脚本发送消息。
@@ -58,3 +60,6 @@ emitter.config('supportNotifyGlobally', true);
 
 上面提到的性能问题在于，**如果打开的页面很多，`options-to-content` 等向 `content` 发送消息时，所有页面都会响应**。
 解决这个问题除了上面配置外，还可以在 `manifest.json` 中配置 `content` 只能插入指定页面。
+
+## 截图
+点击 `popup` 弹出框中的「截图」按钮，会滚动页面进行截图，截图完成后会打开新 `tab` 页展示截图。
