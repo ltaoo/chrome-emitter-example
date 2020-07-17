@@ -53,9 +53,9 @@ emitter.on('injected-to-content', (msg) => {
 });
 
 emitter.on('startScreenshot', () => {
-  console.log('start screenshot');
+  // console.log('start screenshot');
   screenshot((canvas, canvasData) => {
-    console.log(canvasData.size, canvasData.table, canvasData.screenshots);
+    // console.log(canvasData.size, canvasData.table, canvasData.screenshots);
     const url = canvas.toDataURL('image/png');
     emitter.emit('openNewTab', url);
   });

@@ -33,7 +33,7 @@ export function findTopFixedElements(fixedElements, windowHeight) {
     const top = pxToNum(topStr);
     const bottom = pxToNum(bottomStr);
 
-    console.log("findTopFixedElements", top, bottom, windowHeight);
+    // console.log("findTopFixedElements", top, bottom, windowHeight);
     if (top < windowHeight / 2 && bottom > windowHeight / 2) {
       return true;
     }
@@ -59,7 +59,7 @@ export function findBottomFixedElements(
 };
 const MAP = new Map();
 export function setStyle(element, styles = {}) {
-  console.log("setStyle", element, element.style.cssText, styles);
+  // console.log("setStyle", element, element.style.cssText, styles);
   MAP.set(element, element.style.cssText);
   Object.keys(styles).forEach((attr) => {
     element.style[attr] = styles[attr];
@@ -67,7 +67,7 @@ export function setStyle(element, styles = {}) {
 }
 export function resetStyle(element) {
   const originalCssText = MAP.get(element);
-  console.log("resetStyle", element, originalCssText);
+  // console.log("resetStyle", element, originalCssText);
   if (originalCssText === undefined) {
     return;
   }
@@ -85,10 +85,10 @@ export function hideFixedElements(fixedElements) {
   }
 }
 export function showFixedElements(fixedElements) {
-  console.log("1111 showFixedElements", "reset style", fixedElements);
+  // console.log("1111 showFixedElements", "reset style", fixedElements);
   for (let i = 0; i < fixedElements.length; i += 1) {
     const element = fixedElements[i].source;
-    console.log("222 showFixedElements", "reset style");
+    // console.log("222 showFixedElements", "reset style");
     resetStyle(element);
   }
 }

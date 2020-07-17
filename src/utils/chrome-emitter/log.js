@@ -1,7 +1,7 @@
 const checker = require("./checker");
 
-// const DEBUGGER = false;
-const DEBUGGER = true;
+const DEBUGGER = false;
+// const DEBUGGER = true;
 
 const { getCurrentScriptName } = checker;
 

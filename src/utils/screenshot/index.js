@@ -1,5 +1,6 @@
 import emitter from "../chrome-emitter";
 import * as fixedElementUtils from "./fixedElement";
+
 /**
  * 对页面截图
  * @param {*} times
@@ -11,7 +12,7 @@ function screenshot(canvasData, cb, times = 0, originalScrollTop) {
     topFixedElements,
     bottomFixedElements,
   } = canvasData;
-  console.log("start screenshot", times, rows);
+  // console.log("start screenshot", times, rows);
 
   if (times === rows) {
     fixedElementUtils.showFixedElements(topFixedElements);
@@ -23,15 +24,15 @@ function screenshot(canvasData, cb, times = 0, originalScrollTop) {
   }
   if (rows !== 1) {
     if (times === 0) {
-      console.log("hide bottom fixed elements", bottomFixedElements);
+      // console.log("hide bottom fixed elements", bottomFixedElements);
       fixedElementUtils.hideFixedElements(bottomFixedElements);
     }
     if (rows > 1 && times === 1) {
-      console.log("hide top fixed elements", topFixedElements);
+      // console.log("hide top fixed elements", topFixedElements);
       fixedElementUtils.hideFixedElements(topFixedElements);
     }
     if (times === rows - 1) {
-      console.log("show bottom fixed elements", bottomFixedElements);
+      // console.log("show bottom fixed elements", bottomFixedElements);
       fixedElementUtils.showFixedElements(bottomFixedElements);
     }
   }
@@ -53,7 +54,7 @@ function mergeImages(canvasData, cb) {
   // 从下往上绘制
   let index = screenshots.length - 1;
   function draw(screenshot) {
-    console.log("start draw", index);
+    // console.log("start draw", index);
     const tempImage = new Image();
     // console.log(screenshot.data_url);
     tempImage.src = screenshot.url;
@@ -65,7 +66,7 @@ function mergeImages(canvasData, cb) {
         // y = pageHeight - realHeightOfLastScreenshot;
         y = fullHeight - pageHeight;
       }
-      console.log("y position", y);
+      // console.log("y position", y);
       const h = (pageWidth * tempImage.height) / tempImage.width;
       ctx.drawImage(tempImage, 0, y, pageWidth, h);
       index -= 1;
@@ -93,17 +94,17 @@ export default function main(cb) {
   const rows = Math.ceil((scrollHeight * 1.0) / visibleHeight);
 
   const fixedElements = fixedElementUtils.findFixedElements();
-  console.log("fixed elements", fixedElements);
+  // console.log("fixed elements", fixedElements);
   const topFixedElements = fixedElementUtils.findTopFixedElements(
     fixedElements,
     visibleHeight
   );
-  console.log("top fixed elements", topFixedElements);
+  // console.log("top fixed elements", topFixedElements);
   const bottomFixedElements = fixedElementUtils.findBottomFixedElements(
     fixedElements,
     visibleHeight
   );
-  console.log("bottom fixed elements", bottomFixedElements);
+  // console.log("bottom fixed elements", bottomFixedElements);
   const canvasData = {
     size: {
       fullWidth: scrollWidth,
