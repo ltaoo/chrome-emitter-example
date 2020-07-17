@@ -1,4 +1,4 @@
-import emitter from "../chrome-emitter";
+import emitter from "chrome-emitter";
 import * as fixedElementUtils from "./fixedElement";
 
 /**

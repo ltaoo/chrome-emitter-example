@@ -10,7 +10,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "chrome-emitter": "^1.0.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "copy-webpack-plugin": "^6.0.3",

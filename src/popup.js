@@ -1,4 +1,4 @@
-import emitter from './utils/chrome-emitter';
+import emitter from 'chrome-emitter';
 
 console.log("here is popup");
 

@@ -1,4 +1,4 @@
-import emitter from "./utils/chrome-emitter";
+import emitter from "chrome-emitter";
 import { getContent } from "./utils";
 
 console.log("here is options");

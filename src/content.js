@@ -1,12 +1,12 @@
 /**
  * @file content 脚本
  */
-import emitter from './utils/chrome-emitter';
+import emitter from 'chrome-emitter';
 
 import { getContent, loadJs, createFixedContainer } from './utils';
 import screenshot from './utils/screenshot';
 
-emitter.config('removeListenerWhenTabHidden', false);
+emitter.config('supportNotifyGlobally', true);
 
 const CONTAINER_ID = '__emitter_content_id__';
 

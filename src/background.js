@@ -1,5 +1,6 @@
+import emitter from 'chrome-emitter';
+
 import { getContent } from './utils';
-import emitter from './utils/chrome-emitter';
 
 console.log("here is background");
 window.emitter = emitter;

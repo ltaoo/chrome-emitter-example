@@ -48,3 +48,13 @@ emitter.emit('background-to-content', 'hello i am background');
 1. options to content
 2. options to injected
 3. options to background
+
+默认情况 `options to content` 和 `options to injected` 是关闭的。
+因为为了性能考虑，当 `tab` 不是激活状态，会移除掉 `storage.onchanged` 监听，所以如果需要支持 `options to content` 则在 `content` 脚本调用
+
+```js
+emitter.config('supportNotifyGlobally', true);
+```
+
+上面提到的性能问题在于，**如果打开的页面很多，`options-to-content` 等向 `content` 发送消息时，所有页面都会响应**。
+解决这个问题除了上面配置外，还可以在 `manifest.json` 中配置 `content` 只能插入指定页面。
